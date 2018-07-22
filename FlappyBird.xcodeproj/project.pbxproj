@@ -12,6 +12,7 @@
 		887E05AD20FC2F0700F7A18E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 887E05AB20FC2F0700F7A18E /* Main.storyboard */; };
 		887E05AF20FC2F0700F7A18E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 887E05AE20FC2F0700F7A18E /* Assets.xcassets */; };
 		887E05B220FC2F0800F7A18E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 887E05B020FC2F0800F7A18E /* LaunchScreen.storyboard */; };
+		887E05BA20FC30F700F7A18E /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 887E05B920FC30F700F7A18E /* GameScene.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +23,7 @@
 		887E05AE20FC2F0700F7A18E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		887E05B120FC2F0800F7A18E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		887E05B320FC2F0800F7A18E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		887E05B920FC30F700F7A18E /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +58,7 @@
 			children = (
 				887E05A720FC2F0700F7A18E /* AppDelegate.swift */,
 				887E05A920FC2F0700F7A18E /* ViewController.swift */,
+				887E05B920FC30F700F7A18E /* GameScene.swift */,
 				887E05AB20FC2F0700F7A18E /* Main.storyboard */,
 				887E05AE20FC2F0700F7A18E /* Assets.xcassets */,
 				887E05B020FC2F0800F7A18E /* LaunchScreen.storyboard */,
@@ -136,6 +139,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				887E05BA20FC30F700F7A18E /* GameScene.swift in Sources */,
 				887E05AA20FC2F0700F7A18E /* ViewController.swift in Sources */,
 				887E05A820FC2F0700F7A18E /* AppDelegate.swift in Sources */,
 			);
@@ -281,7 +285,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = jp.techacademy.cygcyg.FlappyBird;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -296,7 +300,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = jp.techacademy.cygcyg.FlappyBird;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
