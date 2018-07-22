@@ -261,6 +261,7 @@ class GameScene: SKScene,SKPhysicsContactDelegate{
         
         item = SKSpriteNode(texture: itemTexture)
         item.position = CGPoint(x: self.size.width*rand, y: self.size.height*rand)
+        item.physicsBody = SKPhysicsBody(rectangleOf: itemTexture.size())
         item.physicsBody?.categoryBitMask = itemCategory
         item.physicsBody?.collisionBitMask = birdCategory
         item.physicsBody?.contactTestBitMask = birdCategory
@@ -268,9 +269,10 @@ class GameScene: SKScene,SKPhysicsContactDelegate{
         
         item.physicsBody?.node?.name = "item"
         
-        let moveItem = SKAction.moveBy(x: -itemTexture.size().width , y: 0, duration: 0.5)
-        //let resetItem = SKAction.moveBy(x: self.frame.size.width*0.5, y: 0, duration: 0.0)
-        let repeatScroll = SKAction.repeatForever(SKAction.sequence([moveItem]))
+        let moveItemRight = SKAction.moveBy(x: -self.size.width , y: 0, duration: 10.0)
+        let moveItemLeft = SKAction.moveBy(x: self.size.width, y: 0, duration: 10.0)
+        
+        let repeatScroll = SKAction.repeatForever(SKAction.sequence([moveItemRight,moveItemLeft]))
         
         item.run(repeatScroll)
         
@@ -316,17 +318,17 @@ class GameScene: SKScene,SKPhysicsContactDelegate{
             
             // 鳥に縦方向の力を与える
             bird.physicsBody?.applyImpulse(CGVector(dx: 0, dy: 15))
-        } else if bird.speed == 0 { // --- ここから ---
+        } else if bird.speed == 0 {
             restart()
-        } // --- ここまで追加 ---
+        }
     }
     
     // SKPhysicsContactDelegateのメソッド。衝突したときに呼ばれる
     func didBegin(_ contact: SKPhysicsContact) {
         
-        print("------------衝突しました------------")
-        print("bodyA:\(contact.bodyA.node?.name))")
-        print("bodyB:\(contact.bodyB.node?.name))")
+//        print("------------衝突しました------------")
+//        print("bodyA:\(contact.bodyA.node?.name))")
+//        print("bodyB:\(contact.bodyB.node?.name))")
         
         // ゲームオーバーのときは何もしない
         if scrollNode.speed <= 0 {
@@ -349,7 +351,7 @@ class GameScene: SKScene,SKPhysicsContactDelegate{
             }
 
         }
-        if(contact.bodyA.categoryBitMask & itemCategory) == itemCategory ||
+        else if(contact.bodyA.categoryBitMask & itemCategory) == itemCategory ||
             (contact.bodyB.categoryBitMask & itemCategory) == itemCategory {
             //鳥とアイテムが衝突
             
@@ -361,6 +363,9 @@ class GameScene: SKScene,SKPhysicsContactDelegate{
             setupItem()
             
         }
+            
+            
+            
         else {
             // 壁か地面と衝突した
             print("GameOver")
@@ -374,8 +379,6 @@ class GameScene: SKScene,SKPhysicsContactDelegate{
             bird.run(roll, completion:{
                 self.bird.speed = 0
             })
-            
-            //item.removeAllChildren()
         }
 
     }
@@ -393,6 +396,7 @@ class GameScene: SKScene,SKPhysicsContactDelegate{
         
         
         wallNode.removeAllChildren()
+        item.removeAllChildren()
         
         bird.speed = 1
         scrollNode.speed = 1
