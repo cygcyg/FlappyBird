@@ -211,8 +211,6 @@ class GameScene: SKScene,SKPhysicsContactDelegate{
         
         self.wallNode.addChild(wall)
         })
-    
-        
         // 次の壁作成までの待ち時間のアクションを作成
         let waitAnimation = SKAction.wait(forDuration: 2)
     
@@ -258,7 +256,6 @@ class GameScene: SKScene,SKPhysicsContactDelegate{
     
     func setupItem(){
         
-        
         let rand = CGFloat(arc4random_uniform(6) + 2) / 10.0
         let itemTexture = SKTexture(imageNamed: "e_point_40")
         itemTexture.filteringMode = .linear
@@ -271,8 +268,6 @@ class GameScene: SKScene,SKPhysicsContactDelegate{
         item.physicsBody?.contactTestBitMask = birdCategory
         item.physicsBody?.isDynamic = false
         
-        item.physicsBody?.node?.name = "item"
-        
         let moveItemRight = SKAction.moveBy(x: -self.size.width , y: 0, duration: 10.0)
         let moveItemLeft = SKAction.moveBy(x: self.size.width, y: 0, duration: 10.0)
         
@@ -280,9 +275,7 @@ class GameScene: SKScene,SKPhysicsContactDelegate{
         let repeatScroll = SKAction.repeatForever(SKAction.sequence([moveItemRight,moveItemLeft]))
         
         item.run(repeatScroll)
-        
         addChild(item)
-        
     }
     
     func setupScoreLabel() {
@@ -330,10 +323,6 @@ class GameScene: SKScene,SKPhysicsContactDelegate{
     
     // SKPhysicsContactDelegateのメソッド。衝突したときに呼ばれる
     func didBegin(_ contact: SKPhysicsContact) {
-        
-//        print("------------衝突しました------------")
-//        print("bodyA:\(contact.bodyA.node?.name))")
-//        print("bodyB:\(contact.bodyB.node?.name))")
         
         // ゲームオーバーのときは何もしない
         if scrollNode.speed <= 0 {
@@ -384,14 +373,11 @@ class GameScene: SKScene,SKPhysicsContactDelegate{
             itemScore += 1
             itemScoreLabelNode.text = "ItemScore:\(itemScore)"
             self.removeChildren(in:[item])
-            
             setupItem()
-            
         }
         else {
             // 壁か地面と衝突した
             print("GameOver")
-            
             // スクロールを停止させる
             scrollNode.speed = 0
             
@@ -415,7 +401,6 @@ class GameScene: SKScene,SKPhysicsContactDelegate{
         bird.physicsBody?.velocity = CGVector.zero
         bird.physicsBody?.collisionBitMask = groundCategory | wallCategory
         bird.zRotation = 0.0
-        
         
         wallNode.removeAllChildren()
         item.removeAllChildren()
