@@ -192,6 +192,7 @@ class GameScene: SKScene,SKPhysicsContactDelegate{
         
         // スプライトに物理演算を設定する
         upper.physicsBody = SKPhysicsBody(rectangleOf: wallTexture.size())    // ←追加
+        upper.physicsBody?.categoryBitMask = self.wallCategory 
             
         // 衝突の時に動かないように設定する
         upper.physicsBody?.isDynamic = false    // ←追加
