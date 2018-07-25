@@ -180,6 +180,10 @@ class GameScene: SKScene,SKPhysicsContactDelegate{
         let under = SKSpriteNode(texture: wallTexture)
         under.position = CGPoint(x: 0.0, y: under_wall_y)
         
+        under.physicsBody = SKPhysicsBody(rectangleOf: wallTexture.size())
+        under.physicsBody?.categoryBitMask = self.wallCategory    // ←追加
+        under.physicsBody?.isDynamic = false
+        
         wall.addChild(under)
         
         // 上側の壁を作成
@@ -380,6 +384,8 @@ class GameScene: SKScene,SKPhysicsContactDelegate{
             print("GameOver")
             // スクロールを停止させる
             scrollNode.speed = 0
+            wallNode.speed = 0
+            item.speed = 0
             
             bird.physicsBody?.collisionBitMask = groundCategory
             
@@ -405,6 +411,7 @@ class GameScene: SKScene,SKPhysicsContactDelegate{
         wallNode.removeAllChildren()
         item.removeFromParent()
         bird.speed = 1
+        wallNode.speed = 1
         scrollNode.speed = 1
         setupItem()
     }
